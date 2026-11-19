@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+const posts = await getCollection('posts');
+---
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMC RESEARCH — 独立刊物</title>
+    <style>
+      body { background: #FAF9F6; color: #1C1C1C; font-family: Georgia, "Noto Serif SC", serif; max-width: 720px; margin: 60px auto; padding: 0 24px; line-height: 1.8; }
+      header { border-bottom: 1px solid #1C1C1C; padding-bottom: 20px; margin-bottom: 48px; display: flex; justify-content: space-between; align-items: baseline; }
+      h1 { font-size: 1.5rem; letter-spacing: 0.1em; margin: 0; font-weight: normal; }
+      a.admin-link { font-size: 0.85rem; color: #666; text-decoration: none; font-family: sans-serif; }
+      article { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #E5E2DC; }
+      .meta { font-family: sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; color: #777; text-transform: uppercase; }
+      h2 { font-size: 1.6rem; margin: 8px 0 12px; font-weight: normal; }
+      p { color: #444; margin: 0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>SMC RESEARCH</h1>
+      <a class="admin-link" href="/smcresearch/keystatic">编辑后台 →</a>
+    </header>
+    <main>
+      {posts.length === 0 ? (
+        <p>暂无已发布文章。点击右上角「编辑后台」开始撰写第一篇杂志内容。</p>
+      ) : (
+        posts.map((post) => (
+          <article>
+            <div class="meta">{post.data.issue} · {post.data.publishedDate}</div>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.summary}</p>
+          </article>
+        ))
+      )}
+    </main>
+  </body>
+</html>
