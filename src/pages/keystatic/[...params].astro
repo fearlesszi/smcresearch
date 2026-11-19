@@ -1,0 +1,26 @@
+---
+export function getStaticPaths() {
+  return [{ params: { params: undefined } }];
+}
+---
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMC RESEARCH — 编辑后台</title>
+  </head>
+  <body style="margin: 0;">
+    <div id="keystatic-root"></div>
+    <script>
+      import React from 'react';
+      import { createRoot } from 'react-dom/client';
+      import { makePage } from '@keystatic/astro/ui';
+      import config from '../../../keystatic.config';
+
+      const KeystaticApp = makePage(config);
+      createRoot(document.getElementById('keystatic-root')!).render(
+        React.createElement(KeystaticApp)
+      );
+    </script>
+  </body>
+</html>
